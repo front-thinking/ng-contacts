@@ -1,0 +1,31 @@
+<div class="contact">
+    <div class="contact-header" ng-bind="title">
+        所有国家
+    </div>
+    <div class="header" ng-show="!historyIsNull">
+        <div class="header-serch">
+            <input type="text" placeholder="搜索国家" ng-model="search"/>
+        </div>
+        <div class="header-history">
+            <ul>
+                <li ng-repeat="item in history track by $index" ng-click="choose(item)">{{item}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="contact-body" ng-show="!isNull">
+        <ul class="contact-body-contents">
+            <li class="contact-body-group" ng-repeat="group in contactGroup | filter: search">
+                <div class="contact-body-group-hd" ng-attr-id="{{'group-' + group[0]['py'][0]}}">{{group[0]['py'][0]}}</div>
+                <div class="contact-body-group-bd">
+                    <a href="#" ng-repeat="contact in group | filter: search">{{contact.name}}	</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="contact-body-nav">
+            <li ng-repeat="group in contactGroup" ng-click="go(group[0]['py'][0])">{{group[0]['py'][0]}}</li>
+        </ul>
+    </div>
+    <div class="contact-body-nodata" ng-show="isNull">
+        没有任何数据。
+    </div>
+</div>

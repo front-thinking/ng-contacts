@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Components</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		ul, ol {
+			list-style: none;
+		}
+		a {
+			text-decoration: none;
+		}
+
+
+
+
+		html, body, .contact {
+			height: 100%;
+			width: 100%;
+		}
+		html {
+			font-size: 20px;
+		}
+		.contact {
+			padding-top: 2rem;
+			padding-bottom: 2rem;
+			position: relative;
+		}
+		.header {
+			width: 100%;
+		}
+		.header-serch {
+			width: 100%;
+    		height: 2rem;
+		}
+		.header-serch input {
+			width: 100%;
+		    height: 1.8rem;
+		    text-align: left;
+		    padding-left: 1rem;
+		    /* border: 1px solid #f3f3f3; */
+		    margin-right: 1rem;
+		}
+		.header-history {
+			width: 100%;
+			overflow: auto;
+		}
+		.header-history ul {
+			width: 100%;
+			display: block;
+		}
+		.header-history ul li {
+			width: 40%;
+		    float: left;
+		    font-size: .6rem;
+		    height: 2.1rem;
+		    line-height: 2rem;
+		    text-align: center;
+		    border: 1px solid #00b0ff;
+		    margin-left: 1rem;
+		}
+
+
+
+
+
+		.contact-header {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 2rem;
+			line-height: 2rem;
+			box-shadow: inset 0 -1px 0 #00b0ff;
+			background-color: #fff;
+			font-size: .6rem;
+			text-align: center;
+			color: #00b0ff;
+		}
+		.contact-body {
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		.contact-body-header {
+			position: absolute;
+			width: 100%;
+			top: 0;
+			left: 0;
+			height: 2rem;
+			line-height: 2rem;
+			background-color: #f3f3f3;
+			font-size: .7rem;
+			color: #000;
+			font-weight: 700;
+			text-transform: uppercase;
+			text-indent: 1rem;
+			z-index: 10;
+		}
+		.contact-body-contents {
+			width: 100%;
+			height: 100%;
+			display: block;
+			font-size: .6rem;
+			overflow-y: auto;
+		}
+		.contact-body-group {
+			position: relative;
+			padding-top: 2rem;
+			border-bottom: 1px solid #f3f3f3;
+		}
+		.contact-body-group-hd {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			line-height: 2rem;
+			background-color: #f3f3f3;
+			font-size: .7rem;
+			color: #000;
+			font-weight: 700;
+			text-transform: uppercase;
+			text-indent: 1rem;
+		}
+		.contact-body-group-bd a {
+			display: block;
+			line-height: 2rem;
+			margin-left: 1rem;
+			border-bottom: 1px solid #f3f3f3;
+			color: #000;
+			text-transform: uppercase;
+		}
+		.contact-body-nav {
+			display: -webkit-box;
+		    display: flex;
+		    box-orient: vertical;
+		    -webkit-box-orient: vertical;
+		    -webkit-box-direction: normal;
+		    flex-direction: column;
+		    box-pack: center;
+		    -webkit-box-pack: center;
+		    justify-content: center;
+		    position: absolute;
+		    right: 0;
+		    top: 0;
+		    width: 1rem;
+		    height: 100%;
+		    background: #fff;
+		    text-align: center;
+		    z-index: 20;
+		}
+
+		.contact-body-nav li {
+		    font-size: .6rem;
+		    color: #00b0ff;
+		    text-transform: uppercase;
+		    cursor: pointer;
+		}
+
+		.contact-body-nodata {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			font-size: .7rem;
+			top: 2rem;
+		    text-align: center;
+		    padding-top: 2rem;
+		}
+
+
+
+		.isHidden {
+			visibility: hidden;
+		}
+	</style>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app="myModule">
+	<div class="contact" ng-controller="MainCtrl as ctrl">
+		<div class="contact-header" ng-bind="ctrl.title">
+			所有国家
+		</div>
+		<div class="header" ng-show="!ctrl.historyIsNull">
+			<div class="header-serch">
+				<input type="text" placeholder="搜索国家" ng-model="ctrl.search"/>
+			</div>
+			<div class="header-history">
+				<ul>
+					<li ng-repeat="item in ctrl.history" ng-click="ctrl.choose(item)">{{item}}</li>
+				</ul>
+			</div>
+		</div>
+		<div class="contact-body" ng-show="!ctrl.isNull">
+			<ul class="contact-body-contents">
+				<li class="contact-body-group" ng-repeat="group in ctrl.contactGroup | filter: ctrl.search">
+					<div class="contact-body-group-hd" ng-attr-id="{{'group-' + group[0]['py'][0]}}">{{group[0]['py'][0]}}</div>
+					<div class="contact-body-group-bd">
+						<a href="#" ng-repeat="contact in group | filter: ctrl.search">{{contact.name}}	</a>
+					</div>
+				</li>
+			</ul>
+			<ul class="contact-body-nav">
+				<li ng-repeat="group in ctrl.contactGroup" ng-click="ctrl.go(group[0]['py'][0])">{{group[0]['py'][0]}}</li>
+			</ul>
+		</div>
+		<div class="contact-body-nodata" ng-show="ctrl.isNull">
+			没有任何数据。
+		</div>
+	</div>
+	<script type="text/javascript">
+		angular.module('myModule', [])
+			.controller('MainCtrl', ['$element', '$location', '$anchorScroll', function ($element, $location, $anchorScroll){
+				this.title = '所有国家或地区';
+				this.isNull = true;//默认国家和地区数据为空
+				this.historyIsNull = true; //默认历史数据为空
+				this.search = '';
+
+
+
+
+				var data1 = [];
+				var historyData = ['美国', '日本', '新加坡'];
+				this.history = historyData;
+
+				var data = [
+					{
+						name: '中国',
+						price: '9.9',
+						en: 'cn',
+						py: 'zhongguo'
+					},{
+						name: '美国',
+						price: '9.9',
+						en: 'en',
+						py: 'meiguo'
+					},{
+						name: '英国国',
+						price: '9.9',
+						en: 'en',
+						py: 'yingguo'
+					},{
+						name: '台湾',
+						price: '9.9',
+						en: 'en',
+						py: 'taiwan'
+					},{
+						name: '日本',
+						price: '9.9',
+						en: 'en',
+						py: 'riben'
+					},{
+						name: '新加坡',
+						price: '9.9',
+						en: 'en',
+						py: 'xinjiapo'
+					},{
+						name: '澳大利亚',
+						price: '9.9',
+						en: 'en',
+						py: 'aodaliya'
+					},{
+						name: '韩国',
+						price: '9.9',
+						en: 'en',
+						py: 'hanguo'
+					},{
+						name: '菲律宾',
+						price: '9.9',
+						en: 'en',
+						py: 'feilvbin'
+					},{
+						name: '香港',
+						price: '9.9',
+						en: 'en',
+						py: 'xianggang'
+					},{
+						name: '荷兰',
+						price: '9.9',
+						en: 'en',
+						py: 'helan'
+					},{
+						name: '西班牙',
+						price: '9.9',
+						en: 'en',
+						py: 'xibanya'
+					}
+				];
+
+
+				if(historyData.length !== 0){
+					this.historyIsNull = false;
+				} 
+
+				if(data.length === 0){
+					this.isNull = true;
+				} else {
+					this.isNull = false;
+					this.contactGroup = process(data);
+				}
+
+				// 将数据转换为分组字母顺序联系人信息
+				function process(data) {
+
+					var contactMap = {};
+
+					data.map(function(v) {
+						var alph = v.py[0].toLowerCase();
+						if(!!contactMap[alph]){
+							contactMap[alph].push(v);
+						} else {
+							contactMap[alph] = [v];
+						}
+					});
+
+					// 判断contactMap是否为空(经过上一步一般contactMap不会为空，保险期间增加判断)。 
+					if(Object.keys(contactMap).length !== 0){
+						var contactGroupArray = Object.keys(contactMap).map(function (key) {return contactMap[key]}).sort(function (a,b) {
+							if(a[0]['py'][0] >= b[0]['py'][0]){
+								return 1;
+							} else if (a[0]['py'][0] == b[0]['py'][0]) {
+								return 0;
+							} else {
+								return -1;
+							}
+
+						});
+					}
+
+					return contactGroupArray;
+
+				}
+
+				// 导航点击滚动
+				this.go = function(v){
+					var idSelector = 'group-' + v.toLowerCase();
+					$location.hash(idSelector);
+					$anchorScroll();
+					
+				};
+
+				// 历史选择切换
+				this.choose = function(v){
+					this.search = v;
+				};
+
+
+
+
+
+
+			}]);
+
+// http://plnkr.co/edit/De6bBrkHpojgAbEvHszu?p=preview 参考
+	</script>
+</body>
+</html>
