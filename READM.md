@@ -4,7 +4,7 @@
 
 线上DEMO: [https://front-thinking.github.io/projects/ng-contacts/test.html)
 
-扫码DEMO: ![QR Code](https://github.com/gcaufy/ng-daterange-picker/raw/master/screenshots/qr.png)
+扫码DEMO: ![QR Code](https://github.com/front-thinking/ng-contacts/imgs/1472387121.png)
 
 ![Daterange Picker](https://github.com/front-thinking/ng-contacts/imgs/1472387121.png)
 
