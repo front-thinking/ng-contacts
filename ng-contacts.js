@@ -2,7 +2,7 @@
  * It's a AngularJS mobile contacts.
  * @version  v1.0.0
  * @author front-thinking <Xjw919@gmail.com>
- * @link front-thinking.github.io/
+ * @link front-thinking.github.io
  * @copyright Copyright &copy; 2016
  * @license MIT
  */
@@ -53,16 +53,16 @@
             },
             templateUrl: 'contacts.html',
             link: function ($scope, $element, $attrs){
-                $scope.title = $attrs.title || '通讯录';
+                $scope.title = $scope.title || '通讯录';
                 $scope.isNull = true;//默认国家和地区数据为空
                 $scope.historyIsNull = true; //默认历史数据为空
                 $scope.search = '';
 
                 //var historyData = $attrs.ngCtHistory;
 
-                $scope.history = $attrs.history || [];
+                $scope.history = $scope.history || [];
 
-                var data = $attrs.data || [];
+                var data = $scope.data || [];
 
 
                 if($scope.history.length !== 0){
@@ -90,11 +90,6 @@
                 };
             }
         };
-
-
-
-
-
     }]);
 
 
