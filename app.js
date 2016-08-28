@@ -69,6 +69,12 @@ app.controller('myCtrl', function($scope){
         }
     ];
 
+    $scope.contactSelect = {};
+
+    $scope.submit = function (){
+        console.log('Choosed ' + $scope.contactSelect.name);
+    };
+
 
 
 });

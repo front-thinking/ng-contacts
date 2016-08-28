@@ -47,22 +47,22 @@
             restrict: "AE",
             replace: true,
             scope: {
-                history : "=",
-                data : "=",
-                title: "="
+                ngCtHistory: "=",
+                ngCtData: "=",
+                ngCtTitle: "=",
+                ngCtModel: "="// use the parent model
             },
             templateUrl: 'contacts.html',
             link: function ($scope, $element, $attrs){
-                $scope.title = $scope.title || '通讯录';
                 $scope.isNull = true;//默认国家和地区数据为空
                 $scope.historyIsNull = true; //默认历史数据为空
                 $scope.search = '';
 
                 //var historyData = $attrs.ngCtHistory;
-
-                $scope.history = $scope.history || [];
-
-                var data = $scope.data || [];
+                $scope.contactSelect = $scope.ngCtModel || '';
+                $scope.title = $scope.ngCtTitle || '通讯录';
+                $scope.history = $scope.ngCtHistory || [];
+                var data = $scope.ngCtData || [];
 
 
                 if($scope.history.length !== 0){
@@ -88,6 +88,12 @@
                 $scope.choose = function(v){
                     $scope.search = v;
                 };
+
+                // 选中某个国家
+                $scope.select = function (v){
+                    $scope.ngCtModel = v;
+                };
+
             }
         };
     }]);

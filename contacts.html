@@ -17,7 +17,7 @@
             <li class="contact-body-group" ng-repeat="group in contactGroup | filter: search">
                 <div class="contact-body-group-hd" ng-attr-id="{{'group-' + group[0]['py'][0]}}">{{group[0]['py'][0]}}</div>
                 <div class="contact-body-group-bd">
-                    <a href="#" ng-repeat="contact in group | filter: search">{{contact.name}}	</a>
+                    <a href="#" ng-repeat="contact in group | filter: search" ng-click="select(contact)">{{contact.name}}	</a>
                 </div>
             </li>
         </ul>

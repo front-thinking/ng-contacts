@@ -174,8 +174,8 @@
     </style>
 </head>
 <body ng-app="myApp" ng-controller="myCtrl">
-    <ng-contacts data="contactData" history="historyData" title="title"></ng-contacts>
-
+<button ng-click="submit()">确认</button>
+    <ng-contacts ng-ct-data="contactData" ng-ct-history="historyData" ng-ct-title="title" ng-ct-model="contactSelect"></ng-contacts>
     <script src="//cdn.bootcss.com/angular.js/1.5.0-beta.0/angular.min.js"></script>
     <script src="ng-contacts.js"></script>
     <script src="app.js"></script>
