@@ -4,9 +4,9 @@
 
 线上DEMO: [https://front-thinking.github.io/projects/ng-contacts/test.html)
 
-扫码DEMO: ![QR Code](https://github.com/front-thinking/ng-contacts/imgs/1472387121.png)
+扫码DEMO: ![QR Code](https://github.com/front-thinking/ng-contacts/blob/master/imgs/1472387121.png)
 
-![Daterange Picker](https://github.com/front-thinking/ng-contacts/imgs/1472387121.png)
+![Contacts](https://github.com/front-thinking/ng-contacts/blob/master/imgs/1.png)
 
 ### Usage
 
